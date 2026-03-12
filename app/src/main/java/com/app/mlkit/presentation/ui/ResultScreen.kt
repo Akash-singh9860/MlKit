@@ -33,6 +33,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
@@ -45,13 +46,7 @@ fun ResultScreen(
     imagePath: String,
     onSaveClicked: () -> Unit,
 ) {
-
-    val viewModelStoreOwner = checkNotNull(LocalContext.current as? ViewModelStoreOwner) {
-        Log.e("TAG","No ViewModelStoreOwner was provided via LocalContext")
-    }
-    val viewModel: ResultViewModel = viewModel(viewModelStoreOwner = viewModelStoreOwner)
-
-
+    val viewModel: ResultViewModel = hiltViewModel()
     val state by viewModel.state.collectAsState()
     val pdfPath by viewModel.pdfPath.collectAsState()
     val context = LocalContext.current

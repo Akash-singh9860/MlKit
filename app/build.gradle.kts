@@ -15,7 +15,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -37,6 +36,9 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.10"
     }
 }
 
@@ -74,17 +76,6 @@ dependencies {
     implementation(libs.play.services.tasks)
     implementation(libs.coil.compose)
     implementation(libs.hilt.navigation.compose)
+    implementation(libs.mlkit.document.scanner)
 
-}
-configurations.all {
-    resolutionStrategy.eachDependency {
-        if (
-            requested.group == "androidx.lifecycle" &&
-            requested.name != "lifecycle-runtime-compose" &&
-            !requested.name.startsWith("lifecycle-runtime-compose-android")
-        ) {
-            useVersion("2.7.0")
-            because("Workaround for 2.8.3 crash in lifecycle-runtime-compose")
-        }
-    }
 }
